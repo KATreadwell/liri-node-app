@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-var keys = require("./keys.js");
 var command = process.argv[2];
 var search = process.argv.slice(3).join(" ");
 
@@ -11,7 +10,6 @@ function directory(){
 //add 2 more if and 1 else if
 }
 
-console.log(keys);
 //will it return exports.spotify?  what is in {}? ID + Secret
 
 //concert-this
@@ -22,6 +20,7 @@ console.log(keys);
 function eventLookup(artist){
     var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id+codingbootcamp";
     console.log(artist);
+    console.log()
 }
 
 directory();
@@ -32,7 +31,10 @@ directory();
 
 //spotify-this-song
 var Spotify = require('node-spotify-api');
-var spotify = new Spotify(keys.spotify);
+var spotify = new Spotify({
+    id: process.env.SPOTIFY_ID,
+    secret: process.env.SPOTIFY_SECRET
+});
 
 // var spotify = new Spotify({
 //   id: <your spotify client id>,
