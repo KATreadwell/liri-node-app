@@ -17,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/KATreadwell/liri-node-app/issues"
   },
-  "homepage": "https://github.com/KATreadwell/liri-node-app#readme"
+  "homepage": "https://github.com/KATreadwell/liri-node-app#readme",
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  },
+  "dependencies": {
+    "node-spotify-api": "^1.1.1"
+  }
 }

@@ -1,4 +1,6 @@
-require("dotenv").config();
+if (process.env.NODE_ENV != "production") {
+    require("dotenv").config();
+}
 
 var command = process.argv[2];
 var search = process.argv.slice(3).join(" ");
@@ -35,6 +37,7 @@ var spotify = new Spotify({
     id: process.env.SPOTIFY_ID,
     secret: process.env.SPOTIFY_SECRET
 });
+console.log(`Created Spotify client with ${process.env.SPOTIFY_ID}, ${process.env.SPOTIFY_SECRET}.`)
 
 // var spotify = new Spotify({
 //   id: <your spotify client id>,
