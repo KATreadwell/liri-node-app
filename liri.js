@@ -2,17 +2,15 @@ if (process.env.NODE_ENV != "production") {
     require("dotenv").config();
 }
 
-var command1 = process.argv[2];
-var search2 = process.argv.slice(3).join(" ");
+var command = process.argv[2];
+var search = process.argv.slice(3).join(" ");
 var axios = require("axios");
 var fs = require("fs");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify({
     id: process.env.SPOTIFY_ID,
     secret: process.env.SPOTIFY_SECRET
-})
-// console.log(`Created Spotify client with ${process.env.SPOTIFY_ID}, ${process.env.SPOTIFY_SECRET}.`)
-
+});
 
 function directory(command, search) {
     if (command === "concert-this") {
@@ -24,7 +22,7 @@ function directory(command, search) {
     else if (command === "movie-this") {
         movieLookup(search);
     }
-    else{
+    else {
         random();
     }
 }
@@ -40,7 +38,6 @@ const convertDate = (date, format) => {
     if (mm < 10) {
         mm = '0' + mm;
     }
-
     today = mm + '/' + dd + '/' + yyyy;
     return today;
 }
@@ -49,7 +46,6 @@ const convertDate = (date, format) => {
 function eventLookup(search) {
     axios.get("https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp").then(
         function (response) {
-            //need to return all results and format datatime in MM/DD/YYY
             for (var i = 0; i < response.data.length; i++) {
                 console.log("The venue is " + response.data[i].venue.name);
                 console.log("The band will be playing in " + response.data[i].venue.city);
@@ -71,8 +67,6 @@ function eventLookup(search) {
 }
 
 
-
-
 //spotify this song
 //if no song provided, need to return "The Sign" by Ace of Base
 function songLookup(search) {
@@ -82,25 +76,15 @@ function songLookup(search) {
             return console.log('Error occurred: ' + err);
         }
         var songResult = data.tracks.items[0];
-        console.log(songResult.artists[0].name);
-        console.log(songResult.name);
-        console.log(songResult.preview_url);
-        console.log(songResult.album.name);
+        console.log("Artist Name: " + songResult.artists[0].name);
+        console.log("Song Name: " + songResult.name);
+        console.log("Preview Link: " + songResult.preview_url);
+        console.log("Album: " + songResult.album.name);
     });
-
-    
-    //     console.log(response.data);
-    //     console.log("Artist Name: " + response.data);
-    //     console.log("Song Name: " + response.data);
-    //     console.log("Preview Link: " + response.data);
-    //     console.log("Album: " + response.data);
-    
-
 }
 
 
 //movie-this
-//stuck on how to display rotten tomato score
 //if user doesn't type in movie, it defaults to Mr.Nobody
 function movieLookup(search) {
     axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy").then(
@@ -139,11 +123,11 @@ function random() {
         }
         var dataArr = data.split(",")
         console.log(dataArr);
-        directory(dataArr[0], dataArr[1]);
+        // directory(dataArr[0], dataArr[1]);
         })
 };
 
-directory(command1, search2);
+directory(command, search);
 
 
 
