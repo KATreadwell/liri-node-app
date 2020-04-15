@@ -27,7 +27,7 @@ function directory(command, search) {
     }
 }
 
-const convertDate = (date, format) => {
+const convertDate = function(date, format) {
     let today = new Date(date);
     let dd = today.getDate() + 1,
         mm = today.getMonth() + 1,
@@ -70,8 +70,10 @@ function eventLookup(search) {
 //spotify this song
 //if no song provided, need to return "The Sign" by Ace of Base
 function songLookup(search) {
-    console.log('spotify song: ', search);
-    spotify.search({ type: 'track', query: search, limit: 1 }, function (err, data) {
+    if (search === ""){
+        search = 'The Sign';
+    }
+        spotify.search({ type: 'track', query: search, limit: 1 }, function (err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
@@ -117,7 +119,7 @@ function movieLookup(search) {
 //do-what-it-says
 //run spotify-this-song for "I Want it That Way" from random.txt, can also replace text for movie-this and concert-this
 function random() {
-    fs.readFile("random.txt", "utf8", (err, data) => {
+    fs.readFile("random.txt", "utf8", function(err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
@@ -128,6 +130,5 @@ function random() {
 };
 
 directory(command, search);
-
 
 
