@@ -27,6 +27,7 @@ function directory(command, search) {
     }
 }
 
+//used to convert datetime to date field for bands in town. 
 const convertDate = function(date, format) {
     let today = new Date(date);
     let dd = today.getDate() + 1,
@@ -66,16 +67,14 @@ function eventLookup(search) {
         });
 }
 
-
 //spotify this song
-//if no song provided, need to return "The Sign" by Ace of Base
 function songLookup(search) {
     if (search === ""){
         search = 'The Sign';
     }
-        spotify.search({ type: 'track', query: search, limit: 1 }, function (err, data) {
+        spotify.search({ type: 'track', query: search, limit: 1 }, function (error, data) {
         if (err) {
-            return console.log('Error occurred: ' + err);
+            return console.log('Error occurred: ' + error);
         }
         var songResult = data.tracks.items[0];
         console.log("Artist Name: " + songResult.artists[0].name);
@@ -85,10 +84,11 @@ function songLookup(search) {
     });
 }
 
-
 //movie-this
-//if user doesn't type in movie, it defaults to Mr.Nobody
 function movieLookup(search) {
+    if (search === ""){
+        search = 'Mr. Nobody';
+    }
     axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy").then(
         function (response) {
             console.log("Title: " + response.data.Title);
@@ -109,7 +109,7 @@ function movieLookup(search) {
             } else if (error.request) {
                 console.log(error.request);
             } else {
-                console.log("Error", error.message);
+                console.log("Error", erroror.message);
             }
             console.log(error.config);
         });
@@ -119,15 +119,21 @@ function movieLookup(search) {
 //do-what-it-says
 //run spotify-this-song for "I Want it That Way" from random.txt, can also replace text for movie-this and concert-this
 function random() {
-    fs.readFile("random.txt", "utf8", function(err, data) {
-        if (err) {
-            return console.log('Error occurred: ' + err);
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        console.log(data)
+        if (error) {
+            return console.log('Error occurred: ' + error);
         }
-        var dataArr = data.split(",")
-        console.log(dataArr);
+
+        var dataArr = data.split(",");
+    
+        // console.log(dataArr);
+        // directory(dataArr)
         // directory(dataArr[0], dataArr[1]);
         })
 };
+
+
 
 directory(command, search);
 
