@@ -28,7 +28,7 @@ function directory(command, search) {
 }
 
 //used to convert datetime to date field for bands in town. 
-const convertDate = function(date, format) {
+const convertDate = function (date, format) {
     let today = new Date(date);
     let dd = today.getDate() + 1,
         mm = today.getMonth() + 1,
@@ -67,14 +67,14 @@ function eventLookup(search) {
         });
 }
 
-//spotify this song
+//spotify this song, empty search no longer works
 function songLookup(search) {
-    if (search === ""){
+    if (search === "") {
         search = 'The Sign';
     }
-        spotify.search({ type: 'track', query: search, limit: 1 }, function (error, data) {
+    spotify.search({ type: 'track', query: search, limit: 1 }, function (err, data) {
         if (err) {
-            return console.log('Error occurred: ' + error);
+            return console.log('Error occurred: ' + err);
         }
         var songResult = data.tracks.items[0];
         console.log("Artist Name: " + songResult.artists[0].name);
@@ -86,7 +86,7 @@ function songLookup(search) {
 
 //movie-this
 function movieLookup(search) {
-    if (search === ""){
+    if (search === "") {
         search = 'Mr. Nobody';
     }
     axios.get("http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy").then(
@@ -109,7 +109,7 @@ function movieLookup(search) {
             } else if (error.request) {
                 console.log(error.request);
             } else {
-                console.log("Error", erroror.message);
+                console.log("Error", error.message);
             }
             console.log(error.config);
         });
@@ -120,19 +120,17 @@ function movieLookup(search) {
 //for my program, basically run "node liri.js" and it will pull the command and the search from random.txt
 //run spotify-this-song for "I Want it That Way" from random.txt, can also replace text for movie-this and concert-this
 function random() {
-    fs.readFile("random.txt", "utf8", function(error, data) {
-        if (error) {
-            return console.log('Error occurred: ' + error);
+    fs.readFile("random.txt", "utf8", function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
         }
 
         var dataArr = data.split(",");
         var command = dataArr[0];
-        var search = dataArr[1]; 
-        
-        directory(command, search)
-        }
-    )
-    }
+        var search = dataArr[1];
 
+        directory(command, search) 
+    })
+}
 
 directory(command, search)
