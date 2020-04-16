@@ -45,7 +45,7 @@ const convertDate = function (date, format) {
 
 //bands in town
 function eventLookup(search) {
-    axios.get("https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp").then(
+    axios.get("https://rest.bandsintown.com/artists/" + search.trim() + "/events?app_id=codingbootcamp").then(
         function (response) {
             for (var i = 0; i < response.data.length; i++) {
                 console.log("The venue is " + response.data[i].venue.name);
@@ -119,6 +119,7 @@ function movieLookup(search) {
 //do-what-it-says
 //for my program, basically run "node liri.js" and it will pull the command and the search from random.txt
 //run spotify-this-song for "I Want it That Way" from random.txt, can also replace text for movie-this and concert-this
+//works great except for concert-this
 function random() {
     fs.readFile("random.txt", "utf8", function (err, data) {
         if (err) {
