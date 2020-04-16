@@ -117,24 +117,22 @@ function movieLookup(search) {
 
 
 //do-what-it-says
+//for my program, basically run "node liri.js" and it will pull the command and the search from random.txt
 //run spotify-this-song for "I Want it That Way" from random.txt, can also replace text for movie-this and concert-this
 function random() {
     fs.readFile("random.txt", "utf8", function(error, data) {
-        console.log(data)
         if (error) {
             return console.log('Error occurred: ' + error);
         }
 
         var dataArr = data.split(",");
-    
-        // console.log(dataArr);
-        // directory(dataArr)
-        // directory(dataArr[0], dataArr[1]);
-        })
-};
+        var command = dataArr[0];
+        var search = dataArr[1]; 
+        
+        directory(command, search)
+        }
+    )
+    }
 
 
-
-directory(command, search);
-
-
+directory(command, search)
