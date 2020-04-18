@@ -5,4 +5,4 @@ In this program, you can:
  3. run "spotify-this-song" plus a song name to return that song's details; if blank, defaults to "The Sign" by Ace of Base
  4. run "random" to read random.txt and return the selected program and search query
 
-Check out this video: https://share.vidyard.com/watch/v77SN98P8QAqoc5Yu1etqU?
+Check out this video: https://share.vidyard.com/watch/v77SN98P8QAqoc5Yu1etqU
