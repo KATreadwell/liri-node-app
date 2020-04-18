@@ -1,8 +1,8 @@
 
-Clearly state the problem the app is trying to solve (i.e. what is it doing and why)
-Give a high-level overview of how the app is organized
-Give start-to-finish instructions on how to run the app
-Include screenshots, gifs or videos of the app functioning
-Contain a link to a deployed version of the app
-Clearly list the technologies used in the app
-State your role in the app development
+In this program, you can:
+ *run "concert-this" plus a band name to return that band's upcoming concerts
+ *run "movie-this" plus a movie name to return that movie's details; if blank, defaults to movie Mr. Nobody
+ *run "spotify-this-song" plus a song name to return that song's details; if blank, defaults to "The Sign" by Ace of Base
+ *run "random" to read random.txt and return the selected program and search query
+
+Check out this video: https://share.vidyard.com/watch/v77SN98P8QAqoc5Yu1etqU?

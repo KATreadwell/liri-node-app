@@ -48,8 +48,9 @@ function eventLookup(search) {
     axios.get("https://rest.bandsintown.com/artists/" + search.trim() + "/events?app_id=codingbootcamp").then(
         function (response) {
             for (var i = 0; i < response.data.length; i++) {
-                console.log("The venue is " + response.data[i].venue.name);
-                console.log("The band will be playing in " + response.data[i].venue.city);
+                console.log("*************************************************");
+                console.log("Venue: " + response.data[i].venue.name);
+                console.log("City: " + response.data[i].venue.city);
                 console.log("On " + convertDate(response.data[i].datetime));
             }
         })
@@ -99,7 +100,7 @@ function movieLookup(search) {
             console.log("Language: " + response.data.Language);
             console.log("Plot: " + response.data.Plot);
             console.log("Actors: " + response.data.Actors);
-        }
+        },
     )
         .catch(function (error) {
             if (error.response) {
@@ -117,9 +118,8 @@ function movieLookup(search) {
 
 
 //do-what-it-says
-//for my program, basically run "node liri.js" and it will pull the command and the search from random.txt
+//for my program, run "node liri.js" and it will pull the command and the search from random.txt
 //run spotify-this-song for "I Want it That Way" from random.txt, can also replace text for movie-this and concert-this
-//works great except for concert-this
 function random() {
     fs.readFile("random.txt", "utf8", function (err, data) {
         if (err) {
@@ -130,7 +130,7 @@ function random() {
         var command = dataArr[0];
         var search = dataArr[1];
 
-        directory(command, search) 
+        directory(command, search)
     })
 }
 
